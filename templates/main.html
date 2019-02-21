@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba</title>
+</head>
+<body>
+    {%for archivo in arch%}
+    
+            <p>  <a href="/holi">{{archivo}}</a> archivo  </p>
+            
+    {%endfor%}
+    {%for directorio in directorios%}
+            <p> <a href="/holi">{{directorio}}</a> directorio </p>
+    {%endfor%}
+</body>
+</html>
+
