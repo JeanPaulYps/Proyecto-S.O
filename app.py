@@ -18,4 +18,6 @@ def hello_world():
     
     print(arch)
     print(directorios)
+    #JAcob es malo y vamos a sacar 5
+    
     return render_template('main.html', arch = arch, directorios = directorios)
