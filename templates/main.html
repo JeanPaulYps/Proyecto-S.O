@@ -6,14 +6,13 @@
     <title>Prueba</title>
 </head>
 <body>
-    {%for archivo in arch%}
-    
-            <p>  <a href="/holi">{{archivo}}</a> archivo  </p>
-            
-    {%endfor%}
     {%for directorio in directorios%}
-            <p> <a href="/holi">{{directorio}}</a> directorio </p>
+        <p> <a href="/{{directorio}}">{{directorio}}</a> directorio </p>
     {%endfor%}
+    {%for archivo in arch%}
+            <p>  <a href="/{{archivo}}">{{archivo}}</a> archivo  </p>
+    {%endfor%}
+    
 </body>
 </html>
 
