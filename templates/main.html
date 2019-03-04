@@ -7,10 +7,10 @@
 </head>
 <body>
     {%for directorio in directorios%}
-        <p> <a href="/{{directorio}}">{{directorio}}</a> directorio </p>
+        <p> <a href="/{{directorio[0]}}">{{directorio[1]}}</a> directorio </p>
     {%endfor%}
     {%for archivo in arch%}
-            <p>  <a href="/{{archivo}}">{{archivo}}</a> archivo  </p>
+            <p>  <a href="/{{archivo[0]}}">{{archivo[1]}}</a> archivo  </p>
     {%endfor%}
     
 </body>

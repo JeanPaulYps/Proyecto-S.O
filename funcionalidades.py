@@ -1,4 +1,5 @@
 import os,shutil
+from pathlib import Path, PurePath
 
 #//---------------------------------------------
 #Operaciones no validas para carpetas y archivos
@@ -70,3 +71,15 @@ def cambiarNombre(archivo,nuevoNombre):
     except OSError:
         return "Nombre no ha sido cambiado"
     
+#-------------------------------------------
+#Manejo de direcciones
+
+def getDireccionAbsoluta (direccionRelativa):
+    return str(os.path.join(Path.home(), Path(direccionRelativa)))
+
+#La direccion es relativa con respecto a la carpeta de usuario
+def getRutaRelativa(directorio):
+    return str(PurePath.relative_to(Path(directorio), Path.home()))
+
+def getLink(directorio, nombre):
+    return  os.path.join("tree", os.path.join(directorio, Path(nombre) ) ) 

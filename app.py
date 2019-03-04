@@ -1,38 +1,41 @@
-from flask import Flask, render_template
+from flask import Flask, render_template,redirect
 from pathlib import Path
-import os
+import os,funcionalidades
 
 app = Flask(__name__)
-
-@app.route('/<directorio>')
-def hello_world(directorio):
-    direccion = os.getcwd()
-    if not os.path.isfile(directorio):
-        direccion = os.chdir(directorio)
-    archivos = os.listdir(direccion)
-    directorios = []
-    arch = []
-    for archivo in archivos:
-        if os.path.isfile(archivo):
-            arch.append(archivo)
-        else:
-            directorios.append(archivo)
-    print(os.getcwd())
-    print(arch)
-    print(directorios)
-    return render_template('main.html', arch = arch, directorios = directorios)
-
 @app.route('/')
 def inicio():
-    os.chdir( str(Path.home()))
-    direccion =  str(Path.home())
+    return redirect("/tree/", code = 302)
+
+@app.route('/tree/<path:directorio>')
+def hello_world(directorio):
+    direccion = funcionalidades.getDireccionAbsoluta(directorio)
     archivos = os.listdir(direccion)
     directorios = []
     arch = []
+    rutaRelativa = funcionalidades.getRutaRelativa(direccion)
     for archivo in archivos:
         if os.path.isfile(archivo):
-            arch.append(archivo)
+            tupla = (funcionalidades.getLink(rutaRelativa, archivo), archivo)
+            arch.append(tupla)
         else:
-            directorios.append(archivo)    
-    print(os.getcwd())
+            tupla = (funcionalidades.getLink(rutaRelativa, archivo), archivo)
+            directorios.append(tupla)
+    return render_template('main.html', arch = arch, directorios = directorios)
+
+
+@app.route('/tree/')
+def otro():
+    direccion = funcionalidades.getDireccionAbsoluta("")
+    archivos = os.listdir(direccion)
+    directorios = []
+    arch = []
+    rutaRelativa = funcionalidades.getRutaRelativa(direccion)
+    for archivo in archivos:
+        if os.path.isfile(archivo):
+            tupla = (funcionalidades.getLink(rutaRelativa, archivo), archivo)
+            arch.append(tupla)
+        else:
+            tupla = (funcionalidades.getLink(rutaRelativa, archivo), archivo)
+            directorios.append(tupla)
     return render_template('main.html', arch = arch, directorios = directorios)
