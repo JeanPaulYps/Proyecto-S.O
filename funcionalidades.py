@@ -1,5 +1,6 @@
-import os,shutil
+import os,shutil,manejoRutas
 from pathlib import Path, PurePath
+
 
 #//---------------------------------------------
 #Operaciones no validas para carpetas y archivos
@@ -25,8 +26,9 @@ def copiarArchivo (rutaOrigen, rutaDestino):
     except OSError:
         return "Archivo no enocontrado"
 
+#Para copiar la carpeta, la carpeta de destino no debe existir
 def copiarCarpeta(rutaOrigen, rutaDestino):
-    #La carpeta de destino no debe existir
+
     try:
         shutil.copytree(rutaOrigen,rutaDestino)
         return "Carpeta copiada"
@@ -36,7 +38,7 @@ def copiarCarpeta(rutaOrigen, rutaDestino):
         
 def crearArchivo(direccion, nombre):
     try:
-        archivo = open(direccion + "\\" + nombre, 'w')
+        archivo = open(manejoRutas.unirDireccion(direccion,nombre), 'w')
         archivo.close()
         return "Archivo Creado"
     except OSError:
@@ -44,8 +46,7 @@ def crearArchivo(direccion, nombre):
 
 def crearCarpeta(direccion,nombre):
     try:
-        #Cambiar \ en windows para  / en Linux
-        carpeta = os.mkdir(direccion + "\\" + nombre)
+        carpeta = os.mkdir(manejoRutas.unirDireccion(direccion,nombre))
         return "Carpeta creada"
     except OSError:
         return "No se pudo crear carpeta"
@@ -62,24 +63,23 @@ def cambiarPermisos (archivo,codigo):
 
 def cambiarNombre(archivo,nuevoNombre):
     try:
-        #Cambiar \ de windows, / para linux
-        nombre = archivo.split("\\")
-        nombre[-1] = nuevoNombre
-        nombre = "\\".join(nombre)
+        nombre = manejoRutas.getDireccionPadre(archivo)
+        nombre = manejoRutas.unirDireccion(nombre, nuevoNombre)
         os.rename(archivo,nombre)
         return "Nombre cambiado"
     except OSError:
         return "Nombre no ha sido cambiado"
     
-#-------------------------------------------
-#Manejo de direcciones
-
-def getDireccionAbsoluta (direccionRelativa):
-    return str(os.path.join(Path.home(), Path(direccionRelativa)))
-
-#La direccion es relativa con respecto a la carpeta de usuario
-def getRutaRelativa(directorio):
-    return str(PurePath.relative_to(Path(directorio), Path.home()))
-
-def getLink(directorio, nombre):
-    return  os.path.join("tree", os.path.join(directorio, Path(nombre) ) ) 
+def getArchivos(direccion):
+    direccionAbsoluta = manejoRutas.getDireccionAbsoluta(direccion)
+    direccionRelativa = manejoRutas.getDireccionRelativa(direccionAbsoluta)
+    carpetas = []
+    archivos = []
+    for archivo in os.listdir(direccionAbsoluta):
+        if os.path.isfile(archivo):
+            tupla = (manejoRutas.getLink(direccionRelativa, archivo), archivo)
+            archivos.append(tupla)
+        else:
+            tupla = (manejoRutas.getLink(direccionRelativa, archivo), archivo)
+            carpetas.append(tupla)
+    return (archivos,carpetas)
