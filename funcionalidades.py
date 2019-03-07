@@ -36,7 +36,7 @@ def copiarCarpeta(rutaOrigen, rutaDestino):
         
 def crearArchivo(direccion, nombre):
     try:
-        archivo = open(nombre, 'w')
+        archivo = open(direccion + "\\" + nombre, 'w')
         archivo.close()
         return "Archivo Creado"
     except OSError:
