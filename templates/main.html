@@ -4,15 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prueba</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
 </head>
 <body>
+    <div class="list-group m-5 ">
     {%for directorio in directorios%}
-        <p> <a href="/{{directorio[0]}}">{{directorio[1]}}</a> directorio </p>
+        <a href="/{{directorio[0]}}" class = "list-group-item list-group-item-action"><p> <i class="far fa-folder"></i> {{directorio[1]}} </p></a>
     {%endfor%}
     {%for archivo in arch%}
-            <p>  <a href="/{{archivo[0]}}">{{archivo[1]}}</a> archivo  </p>
+        <a href="/{{archivo[0]}}" class = "list-group-item list-group-item-action"><p><i class="far fa-file"></i> {{archivo[1]}} </p></a>
     {%endfor%}
-    
+    </div>
 </body>
 </html>
 
