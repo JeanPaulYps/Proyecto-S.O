@@ -11,10 +11,10 @@
 <body>
     <div class="list-group m-5 ">
     {%for directorio in directorios%}
-        <a href="/{{directorio[0]}}" class = "list-group-item list-group-item-action"><p> <i class="far fa-folder"></i> {{directorio[1]}} </p></a>
+        <a href="/{{directorio[0]}}" class = "list-group-item list-group-item-action"><i class="far fa-folder"></i> {{directorio[1]}} </a>
     {%endfor%}
     {%for archivo in arch%}
-        <a href="/{{archivo[0]}}" class = "list-group-item list-group-item-action"><p><i class="far fa-file"></i> {{archivo[1]}} </p></a>
+        <a href="/{{archivo[0]}}" class = "list-group-item list-group-item-action"><i class="far fa-file"></i> {{archivo[1]}} </a>
     {%endfor%}
     </div>
 </body>
