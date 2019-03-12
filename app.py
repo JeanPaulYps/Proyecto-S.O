@@ -1,6 +1,6 @@
 from flask import Flask, render_template,redirect,request
 from pathlib import Path
-import os,funcionalidades, manejoRutas
+import os, funcionalidades, manejoRutas
 
 app = Flask(__name__)
 @app.route('/')
@@ -35,7 +35,7 @@ def borrar ():
     else:
         funcionalidades.borrarCarpeta(ruta)
     return "archivo borrado"
-
+#un cambio xd
 #copiar?origen=C:\Users\Jean Paul\Desktop\archivo.txt&destino=C:\Users\Jean Paul\Desktop\destino
 @app.route('/copiar')
 def copiar():

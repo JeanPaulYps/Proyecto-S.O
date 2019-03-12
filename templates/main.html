@@ -1,22 +1,53 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prueba</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- External Lybrary of Buttons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
 </head>
+
 <body>
+
     <div class="list-group m-5 ">
-    {%for directorio in directorios%}
-        <a href="/{{directorio[0]}}" class = "list-group-item list-group-item-action"><i class="far fa-folder"></i> {{directorio[1]}} </a>
-    {%endfor%}
-    {%for archivo in arch%}
-        <a href="/{{archivo[0]}}" class = "list-group-item list-group-item-action"><i class="far fa-file"></i> {{archivo[1]}} </a>
-    {%endfor%}
+
+        <div class="d-flex justify-content-end">
+            <div class="button-group">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    Opciones
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#"></a>
+                    <a class="dropdown-item" href="#"></a>
+                </div>
+            </div>
+        </div>
+
+        {%for directorio in directorios%}
+        <a href="/{{directorio[0]}}" class="list-group-item list-group-item-action"><i class="far fa-folder"></i>
+            {{directorio[1]}} </a>
+        {%endfor%}
+        {%for archivo in arch%}
+        <a href="" class="list-group-item list-group-item-action"><i class="far fa-file"></i>
+            {{archivo[1]}} </a>
+        {%endfor%}
     </div>
 </body>
-</html>
 
+</html>
