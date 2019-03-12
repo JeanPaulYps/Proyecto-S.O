@@ -76,10 +76,14 @@ def getArchivos(direccion):
     carpetas = []
     archivos = []
     for archivo in os.listdir(direccionAbsoluta):
-        if os.path.isfile(archivo):
+        rutaArchivo = os.path.join(direccionAbsoluta, archivo)
+        if os.path.isfile(rutaArchivo):
             tupla = (manejoRutas.getLink(direccionRelativa, archivo), archivo)
             archivos.append(tupla)
-        else:
+        elif os.path.isdir(rutaArchivo):
             tupla = (manejoRutas.getLink(direccionRelativa, archivo), archivo)
             carpetas.append(tupla)
+        else:
+            tupla = (manejoRutas.getLink(direccionRelativa, archivo), archivo)
+            archivos.append(tupla)
     return (archivos,carpetas)
