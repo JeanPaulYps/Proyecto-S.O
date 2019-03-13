@@ -30,12 +30,17 @@
 
 
         {%for directorio in directorios%}
-        <a href="/{{directorio[0]}}" class="list-group-item list-group-item-action"><i class="far fa-folder"></i>
-            {{directorio[1]}} 
-        </a>
-        <div class="d-flex justify-content-end">
-            <div class="button-group">
-                <button type="button"  style="background:grey" class="btn btn-primary btn-block dropdown-toggle" data-toggle="dropdown">
+        <div class="list-group-item list-group-item-action d-flex bd-highlight">
+
+            <div class="p-2 flex-fill bd-highlight">
+                <a href="/{{directorio[0]}}" >
+                    <i class="far fa-folder "></i>
+                    {{directorio[1]}} 
+                </a>
+            </div>
+
+            <div class="p-2 bd-highlight">
+                <button type="button" class="btn btn-sm btn-primary btn-block dropdown-toggle" data-toggle="dropdown">
                     Opciones de Carpeta 
                 </button>
                 <div class="dropdown-menu">
@@ -46,26 +51,35 @@
                     <a class="dropdown-item"  href="/borrar?ruta={{directorio[0]}}">Borrar</a>
                 </div>
             </div>
+
         </div>
         {%endfor%}
         {%for archivo in arch%}
-        <a href="/{{archivo[0]}}" class="list-group-item list-group-item-action"><i class="far fa-file"></i>
-            {{archivo[1]}} 
-        </a>
-        <div class="d-flex justify-content-end">
-            <div class="button-group">
-                <button type="button"  style="background:orangered" class="btn btn-primary btn-block dropdown-toggle" data-toggle="dropdown">
-                    Opciones De Archivo
-                </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" >Copiar</a>
-                    <a class="dropdown-item" >Cortar</a>
-                    <a class="dropdown-item" >Cambiar Nombre</a>
-                    <a class="dropdown-item" >Asignar Permisos</a>
-                    <a class="dropdown-item" href="/borrar?ruta={{archivo[0]}}">Borrar</a>
-                </div>
+        <div class="list-group-item list-group-item-action d-flex bd-highlight">
+
+            <div class="p-2 flex-fill bd-highlight"> 
+                <a href="/{{archivo[0]}}">
+                    <i class="far fa-file"></i>
+                    {{archivo[1]}} 
+                </a>
             </div>
-        </div>     
+            
+            <div class="p-2 bd-highlight">
+                <div class="button-group">
+                    <button type="button"  class="btn btn-sm btn-secondary btn-block dropdown-toggle" data-toggle="dropdown">
+                        Opciones De Archivo
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" >Copiar</a>
+                        <a class="dropdown-item" >Cortar</a>
+                        <a class="dropdown-item" >Cambiar Nombre</a>
+                        <a class="dropdown-item" >Asignar Permisos</a>
+                        <a class="dropdown-item" href="/borrar?ruta={{archivo[0]}}">Borrar</a>
+                    </div>
+                </div>
+            </div>     
+
+        </div>
         {%endfor%}
 
     </div>
