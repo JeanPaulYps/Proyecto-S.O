@@ -2,6 +2,7 @@ import os
 from pathlib import Path, PurePath
 
 def getDireccionAbsoluta (direccionRelativa):
+    print(str(os.path.join(Path.home(), Path(direccionRelativa) )))
     return str(os.path.join(Path.home(), Path(direccionRelativa) ) )
 
 #La direccion es relativa con respecto a la carpeta de usuario

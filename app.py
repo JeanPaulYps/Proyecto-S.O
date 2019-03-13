@@ -28,13 +28,16 @@ def otro():
 #borrar?ruta=C:\Users\Jean Paul\Desktop\holi.txt
 @app.route('/borrar')
 def borrar ():
-    ruta = str(request.args.get("ruta"))
-    print(ruta)
-    if os.path.isfile(ruta):
-        funcionalidades.borrarArchivo(ruta)
+    rutaRelativa= str(request.args.get("ruta"))
+    rutaRelativa =rutaRelativa[5:]
+    rutaAbsoluta = manejoRutas.getDireccionAbsoluta(rutaRelativa)
+    print(rutaAbsoluta)
+    if os.path.isfile(rutaAbsoluta):
+        funcionalidades.borrarArchivo(rutaAbsoluta)
     else:
-        funcionalidades.borrarCarpeta(ruta)
-    return "archivo borrado"
+        funcionalidades.borrarCarpeta(rutaAbsoluta)
+    return otro()
+   
 #un cambio xd
 #copiar?origen=C:\Users\Jean Paul\Desktop\archivo.txt&destino=C:\Users\Jean Paul\Desktop\destino
 @app.route('/copiar')
