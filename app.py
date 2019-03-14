@@ -13,7 +13,8 @@ def hello_world(directorio):
     contenidoCarpeta = funcionalidades.getArchivos(directorio)
     archivos = contenidoCarpeta[0]
     directorios = contenidoCarpeta[1]
-    return render_template('main.html', arch = archivos, directorios = directorios)
+
+    return render_template('main.html', arch = archivos, directorios = directorios, ruta = directorio)
 
 
 @app.route('/tree/')
@@ -22,7 +23,7 @@ def otro():
     contenidoCarpeta = funcionalidades.getArchivos(direccion)
     archivos = contenidoCarpeta[0]
     directorios = contenidoCarpeta[1]
-    return render_template('main.html', arch = archivos, directorios = directorios)
+    return render_template('main.html', arch = archivos, directorios = directorios, ruta = "")
 
 
 #borrar?ruta=C:\Users\Jean Paul\Desktop\holi.txt
@@ -97,6 +98,40 @@ def cambiarNombre2():
         archivos = contenidoCarpeta[0]
         directorios = contenidoCarpeta[1]
         return render_template('nombre.html', arch= archivos,directorios = directorios )
+
+    if request.method == 'POST':
+        seleccion = request.form["seleccion"]
+        nuevoNombre = request.form["nuevoNombre"]
+        rutaAbsoluta = manejoRutas.getDireccionAbsoluta("")
+        rutaAbsolutaConArchivo = manejoRutas.unirDireccion(rutaAbsoluta, seleccion)
+        funcionalidades.cambiarNombre(rutaAbsolutaConArchivo,nuevoNombre)
+        return redirect(url_for('inicio'))
+
+@app.route('/cambiarPermisos2/<path:directorio>', methods = ['POST', 'GET'])
+def cambiarPermisos(directorio): # Configurar todo  con los permisos
+    if request.method == "GET":
+        direccion = manejoRutas.getDireccionAbsoluta(directorio)
+        contenidoCarpeta = funcionalidades.getArchivos(directorio)
+        archivos = contenidoCarpeta[0]
+        directorios = contenidoCarpeta[1]
+        return render_template('permisos.html', arch= archivos,directorios = directorios, ruta = directorio)
+    
+    if request.method == "POST":
+        seleccion = request.form["seleccion"]
+        nuevoNombre = request.form["nuevoNombre"]
+        rutaAbsoluta = manejoRutas.getDireccionAbsoluta(directorio)
+        rutaAbsolutaConArchivo = manejoRutas.unirDireccion(rutaAbsoluta, seleccion)
+        funcionalidades.cambiarPermisos(rutaAbsolutaConArchivo,nuevoNombre)
+        return redirect(url_for('hello_world', directorio = directorio))
+
+@app.route('/cambiarPermisos/', methods = ['POST', 'GET'])
+def cambiarPermisos2():
+    if request.method == 'GET':
+        direccion = manejoRutas.getDireccionAbsoluta("")
+        contenidoCarpeta = funcionalidades.getArchivos(direccion)
+        archivos = contenidoCarpeta[0]
+        directorios = contenidoCarpeta[1]
+        return render_template('permisos.html', arch= archivos,directorios = directorios )
 
     if request.method == 'POST':
         seleccion = request.form["seleccion"]
