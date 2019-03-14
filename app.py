@@ -86,6 +86,7 @@ def cambiarNombre(directorio):
         nuevoNombre = request.form["nuevoNombre"]
         rutaAbsoluta = manejoRutas.getDireccionAbsoluta(directorio)
         rutaAbsolutaConArchivo = manejoRutas.unirDireccion(rutaAbsoluta, seleccion)
+        funcionalidades.cambiarNombre(rutaAbsolutaConArchivo,nuevoNombre)
         return redirect(url_for('hello_world', directorio = directorio))
 
 @app.route('/cambiarNombre/', methods = ['POST', 'GET'])
@@ -102,4 +103,5 @@ def cambiarNombre2():
         nuevoNombre = request.form["nuevoNombre"]
         rutaAbsoluta = manejoRutas.getDireccionAbsoluta("")
         rutaAbsolutaConArchivo = manejoRutas.unirDireccion(rutaAbsoluta, seleccion)
+        funcionalidades.cambiarNombre(rutaAbsolutaConArchivo,nuevoNombre)
         return redirect(url_for('inicio'))
