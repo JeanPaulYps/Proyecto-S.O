@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- External Lybrary of Buttons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div class ="list-group m-5 ">
+        <div class="container">
+
+            <form action="/cambiarNombre/{{ruta}}" method="POST">
+
+                <div class= "row justify-content-center form-group">
+                    <div class="col-5">
+                        <select name="seleccion" class="form-control">
+                            {%for directorio in directorios %}
+                            <option value = "{{directorio[1]}}"> {{directorio[1]}} </option>
+                            {%endfor%}
+                            {%for archivo in arch %}
+                            <option  value = "{{archivo[1]}}"> {{archivo[1]}} </option>
+                            {%endfor%}
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="row justify-content-center form-group"> 
+                    <div class="col-5">
+                        <div class="input-group input-group">
+                            <div class = "input-group-prepended">
+                                <span for="" class="input-group-text">Nombre </span>
+                            </div>
+                            <input type="text" name="nuevoNombre" class="form-control"> 
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row justify-content-center form-group"> 
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </div>
+        </form>
+        </div>
+    </div>
+</body>

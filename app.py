@@ -1,4 +1,4 @@
-from flask import Flask, render_template,redirect,request
+from flask import Flask, render_template,redirect,request, session, url_for
 from pathlib import Path
 import os, funcionalidades, manejoRutas
 
@@ -72,11 +72,34 @@ def crearArchivo():
     return "archivo creado"
 
 #cambiarNombre?archivo=C:\Users\Jean Paul\Desktop\ArchivoDePrueba.txt&nombre=holi.txt
-@app.route('/cambiarNombre')
-def cambiarNombre():
-    archivo = str(request.args.get("archivo"))
-    nombre = str(request.args.get("nombre"))
-    print(archivo)
-    print(nombre)
-    print(funcionalidades.cambiarNombre(archivo,nombre))
-    return "nombre cambiado"
+@app.route('/cambiarNombre/<path:directorio>', methods = ['POST', 'GET'])
+def cambiarNombre(directorio):
+    if request.method == "GET":
+        direccion = manejoRutas.getDireccionAbsoluta(directorio)
+        contenidoCarpeta = funcionalidades.getArchivos(directorio)
+        archivos = contenidoCarpeta[0]
+        directorios = contenidoCarpeta[1]
+        return render_template('nombre.html', arch= archivos,directorios = directorios, ruta = directorio)
+    
+    if request.method == "POST":
+        seleccion = request.form["seleccion"]
+        nuevoNombre = request.form["nuevoNombre"]
+        rutaAbsoluta = manejoRutas.getDireccionAbsoluta(directorio)
+        rutaAbsolutaConArchivo = manejoRutas.unirDireccion(rutaAbsoluta, seleccion)
+        return redirect(url_for('hello_world', directorio = directorio))
+
+@app.route('/cambiarNombre/', methods = ['POST', 'GET'])
+def cambiarNombre2():
+    if request.method == 'GET':
+        direccion = manejoRutas.getDireccionAbsoluta("")
+        contenidoCarpeta = funcionalidades.getArchivos(direccion)
+        archivos = contenidoCarpeta[0]
+        directorios = contenidoCarpeta[1]
+        return render_template('nombre.html', arch= archivos,directorios = directorios )
+
+    if request.method == 'POST':
+        seleccion = request.form["seleccion"]
+        nuevoNombre = request.form["nuevoNombre"]
+        rutaAbsoluta = manejoRutas.getDireccionAbsoluta("")
+        rutaAbsolutaConArchivo = manejoRutas.unirDireccion(rutaAbsoluta, seleccion)
+        return redirect(url_for('inicio'))
