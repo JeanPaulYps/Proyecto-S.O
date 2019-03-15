@@ -186,6 +186,7 @@ def cambiarPermisos(directorio): # Configurar todo  con los permisos
         rutaAbsolutaConArchivo = manejoRutas.unirDireccion(rutaAbsoluta, permisos)
         print(str("0o"+str(userPermisos)+str(groupPermisos)+str(otherPermisos)))
         funcionalidades.cambiarPermisos(rutaAbsolutaConArchivo,str("0o"+str(userPermisos)+str(groupPermisos)+str(otherPermisos)))
+
         return redirect(url_for('hello_world', directorio = directorio))
 
 @app.route('/cambiarPermisos/', methods = ['POST', 'GET'])
