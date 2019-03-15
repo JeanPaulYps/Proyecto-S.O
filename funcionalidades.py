@@ -56,7 +56,7 @@ def crearCarpeta(direccion,nombre):
 #//------------------------------------------
 #Operaciones validas para carpetas y archivos 
 
-def cambiarPermisos (archivo,codigo):
+def cambiarPermisos (archivo,codigo ):
     try:
         os.chmod(archivo,int(codigo,8))
         print("\nPermisos cambiados\n")

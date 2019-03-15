@@ -168,11 +168,25 @@ def cambiarPermisos(directorio): # Configurar todo  con los permisos
         return render_template('permisos.html', arch= archivos, directorios = directorios, ruta = directorio)
     
     if request.method == "POST":
-        seleccion = request.form["seleccion"]
-        nuevoNombre = request.form["nuevoNombre"]
+        permisos = request.form["permisos"]
+        uRead = request.form["uread"]
+        print(uRead +"hola" )
+        uWrite = request.form["uwrite"]
+        uExecute = request.form["uexecute"]
+        userPermisos= int(uRead)+int(uWrite)+int(uExecute)
+        gRead = request.form["gread"]
+        gWrite = request.form["gwrite"]
+        gExecute = request.form["gexecute"]
+        groupPermisos= int(gRead)+int(gWrite)+int(gExecute)
+        oRead = request.form["oread"]
+        oWrite = request.form["owrite"]
+        oExecute = request.form["oexecute"]
+        otherPermisos= int(oRead)+int(oWrite)+int(oExecute)
         rutaAbsoluta = manejoRutas.getDireccionAbsoluta(directorio)
-        rutaAbsolutaConArchivo = manejoRutas.unirDireccion(rutaAbsoluta, seleccion)
-        funcionalidades.cambiarPermisos(rutaAbsolutaConArchivo,nuevoNombre)
+        rutaAbsolutaConArchivo = manejoRutas.unirDireccion(rutaAbsoluta, permisos)
+        print(str("0o"+str(userPermisos)+str(groupPermisos)+str(otherPermisos)))
+        funcionalidades.cambiarPermisos(rutaAbsolutaConArchivo,str("0o"+str(userPermisos)+str(groupPermisos)+str(otherPermisos)))
+
         return redirect(url_for('hello_world', directorio = directorio))
 
 @app.route('/cambiarPermisos/', methods = ['POST', 'GET'])
@@ -185,9 +199,21 @@ def cambiarPermisos2():
         return render_template('permisos.html', arch= archivos,directorios = directorios )
 
     if request.method == 'POST':
-        seleccion = request.form["seleccion"]
-        nuevoNombre = request.form["nuevoNombre"]
+        permisos = request.form["permisos"]
+        uRead = request.form["uread"]
+        uWrite = request.form["uwrite"]
+        uExecute = request.form["uexecute"]
+        userPermisos= int(uRead)+int(uWrite)+int(uExecute)
+        gRead = request.form["gread"]
+        gWrite = request.form["gwrite"]
+        gExecute = request.form["gexecute"]
+        groupPermisos= int(gRead)+int(gWrite)+int(gExecute)
+        oRead = request.form["oread"]
+        oWrite = request.form["owrite"]
+        oExecute = request.form["oexecute"]
+        otherPermisos= int(oRead)+int(oWrite)+int(oExecute)
         rutaAbsoluta = manejoRutas.getDireccionAbsoluta("")
-        rutaAbsolutaConArchivo = manejoRutas.unirDireccion(rutaAbsoluta, seleccion)
-        funcionalidades.cambiarNombre(rutaAbsolutaConArchivo,nuevoNombre)
+        rutaAbsolutaConArchivo = manejoRutas.unirDireccion(rutaAbsoluta, permisos)
+        print(str("0o"+str(userPermisos)+str(groupPermisos)+str(otherPermisos)))
+        funcionalidades.cambiarPermisos(rutaAbsolutaConArchivo,str("0o"+str(userPermisos)+str(groupPermisos)+str(otherPermisos)))
         return redirect(url_for('inicio'))

@@ -31,7 +31,7 @@
 
                 <div class="row justify-content-center form-group">
                     <div class="col-5">
-                        <select name="seleccion" class="form-control">
+                        <select name="permisos" class="form-control">
                             {%for directorio in directorios %}
                             <option value="{{directorio[1]}}"> {{directorio[1]}} </option>
                             {%endfor%}
@@ -48,17 +48,26 @@
                         <div class="input-group input-group">
                             <div class="input-group-prepended">
                                 <h2> Usuario </h2>
-                                <input type="checkbox" name="uread" value="leer"> Leer <br>
-                                <input type="checkbox" name="uwrite" value="escribir"> Escribir<br>
-                                <input type="checkbox" name="uexecute" value="ejecutar" checked> Ejecutar <br>
+                                <input type="checkbox" name="uread" value= 4> Leer <br>
+                                <input hidden value= 0 name= "uread">
+                                <input type="checkbox" name="uwrite" value= 2> Escribir<br>
+                                <input hidden value= 0 name= "uwrite">
+                                <input type="checkbox" name="uexecute" value=1> Ejecutar <br>
+                                <input hidden value= 0 name= "uexecute">
                                 <h2> Grupo </h2>
-                                <input type="checkbox" name="gread" value="leer"> Leer <br>
-                                <input type="checkbox" name="gwrite" value="escribir"> Escribir<br>
-                                <input type="checkbox" name="gexecute" value="ejecutar" checked> Ejecutar <br>
+                                <input type="checkbox" name="gread" value=4> Leer <br>
+                                <input hidden value= 0 name= "gread">
+                                <input type="checkbox" name="gwrite" value=2> Escribir<br>
+                                <input hidden value= 0 name= "gwrite">
+                                <input type="checkbox" name="gexecute" value=1 > Ejecutar <br>
+                                <input hidden value= 0 name= "gexecute">
                                 <h2> Otros </h2>
-                                <input type="checkbox" name="oread" value="leer"> Leer <br>
-                                <input type="checkbox" name="owrite" value="escribir"> Escribir<br>
-                                <input type="checkbox" name="oexecute" value="ejecutar" checked> Ejecutar <br>
+                                <input type="checkbox" name="oread" value=4> Leer <br>
+                                <input hidden value= 0 name= "oread">
+                                <input type="checkbox" name="owrite" value=2> Escribir<br>
+                                <input hidden value= 0 name= "owrite">
+                                <input type="checkbox" name="oexecute" value=1> Ejecutar <br>
+                                <input hidden value= 0 name= "oexecute">
                             </div>
                         </div>
                     </div>
