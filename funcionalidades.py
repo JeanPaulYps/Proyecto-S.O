@@ -14,7 +14,7 @@ def borrarArchivo (ruta):
 
 def borrarCarpeta (ruta):
     try:
-        os.rmdir(ruta)
+        shutil.rmtree(ruta)
         return "Archivo encontrado"
     except OSError:
         return "Archivo no encontrado"
