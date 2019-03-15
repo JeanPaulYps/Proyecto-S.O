@@ -3,10 +3,12 @@ from pathlib import Path
 import os, funcionalidades, manejoRutas
 
 app = Flask(__name__)
+
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+
 @app.route('/')
 def inicio():
     return redirect("/tree/", code = 302)
-
 
 @app.route('/tree/<path:directorio>')
 def hello_world(directorio):
@@ -48,17 +50,43 @@ def borrar ():
    
 #un cambio xd
 #copiar?origen=C:\Users\Jean Paul\Desktop\archivo.txt&destino=C:\Users\Jean Paul\Desktop\destino
-@app.route('/copiar')
-def copiar():
-    origen = str(request.args.get("origen"))
-    destino = str(request.args.get("destino"))
-    print(origen)
-    print(destino)
-    if os.path.isfile(origen):
-        funcionalidades.copiarArchivo(origen,destino)
-    else:
-        funcionalidades.copiarCarpeta(origen,destino)
-    return "archivo copiado"
+@app.route('/copiar/<path:directorio>', methods = ['POST'])
+def copiar(directorio):
+    if request.method == "POST":
+        nombre = request.form["nombre"]
+        session["origenElemento"] =manejoRutas.unirDireccion(manejoRutas.getDireccionAbsoluta(directorio), nombre)
+        return redirect(url_for('hello_world', directorio = directorio))
+
+@app.route('/copiar/', methods = ['POST'])
+def copiar2():
+    if request.method == "POST":
+        nombre = request.form["nombre"]
+        session["origenElemento"] = manejoRutas.unirDireccion( manejoRutas.getDireccionAbsoluta(""), nombre)
+        return redirect(url_for('otro'))
+
+@app.route('/pegar/<path:directorio>', methods = ['POST'])
+def pegar(directorio):
+    if request.method == "POST":
+        origen = session["origenElemento"]
+        destino = manejoRutas.getDireccionAbsoluta(directorio)
+        if os.path.isfile(origen):
+            funcionalidades.copiarArchivo(origen,destino)
+        else:
+            funcionalidades.copiarCarpeta(origen,destino)
+        del session["origenElemento"]
+        return redirect(url_for('hello_world', directorio = directorio))
+
+@app.route('/pegar/', methods = ['POST'])
+def pegar2():
+    if request.method == "POST":
+        origen = session["origenElemento"]
+        destino = manejoRutas.getDireccionAbsoluta("")
+        if os.path.isfile(origen):
+            funcionalidades.copiarArchivo(origen,destino)
+        else:
+            funcionalidades.copiarCarpeta(origen,destino)
+        del session["origenElemento"]
+        return redirect(url_for('otro'))
 
 #crearCarpeta?direccion=C:\Users\Jean Paul\Desktop&nombre=PruebaDeFuncion
 @app.route('/crearCarpeta/<path:directorio>', methods = ['POST'])

@@ -78,6 +78,11 @@
     <div class="list-group m-5 ">
         <div class="list-group-item list-group-item-action d-flex justify-content-center bd-highlight">
             <div class="button-group ">
+               {% if session.origenElemento %}
+                <form action="/pegar/{{ruta}}" method="POST" class = "btn btn-sm btn-outline-warning"> 
+            		<button type="submit" class = "btn fas fa-paste" ></button>
+                </form>
+                {% endif %}
                 <a class="btn btn-outline-primary" data-toggle="modal" data-target="#modalLoginForm">Crear Archivo</a>
                 <a class="btn btn-outline-secondary" data-toggle="modal" data-target="#modalLoginForm1">Crear Carpeta</a>
                 <a class="btn btn-outline-success" href="/cambiarNombre/{{ruta}}">Cambiar Nombres</a>
@@ -96,30 +101,34 @@
             </div>
 
             <div class="p-2 bd-highlight">
-                <a type="button" class="btn btn-sm btn-primary" href="/borrar?ruta={{directorio[0]}}">
-                    Eliminar Carpeta
-                </a>
+                <form action="/copiar/{{ruta}}" method="POST" class = "btn btn-sm ">
+                    <input hidden value="{{directorio[1]}}" name="nombre" >
+            		<button type="submit" class="btn fas fa-copy" ></button>
+                </form>
+                <a class="fas fa-trash" style="color:#DB2B30;" href="/borrar?ruta={{directorio[0]}}"></a>
+                
             </div>
-
+            
         </div>
         {%endfor%}
         {%for archivo in arch%}
         <div class="list-group-item list-group-item-action d-flex bd-highlight">
-
+            
             <div class="p-2 flex-fill bd-highlight">
                 <a>
                     <i class="far fa-file"></i>
                     {{archivo[1]}}
                 </a>
             </div>
-
+            
             <div class="p-2 bd-highlight">
-                <div class="button-group">
-                    <a type="button" class="btn btn-sm btn-secodary" style="background:grey"
-                        href="/borrar?ruta={{archivo[0]}}">
-                        Eliminar Archivo
-                    </a>
-                </div>
+                <form action="/copiar/{{ruta}}" method="POST" class = "btn btn-sm">
+                    <input hidden value="{{archivo[1]}}" name="nombre" >
+                    <button type="submit" class="btn fas fa-copy" ></button>
+                </form>
+                <a class="fas fa-trash" style="color:#DB2B30;"
+                href="/borrar?ruta={{archivo[0]}}">
+                </a>
             </div>
 
         </div>
