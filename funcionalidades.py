@@ -14,7 +14,7 @@ def borrarArchivo (ruta):
 
 def borrarCarpeta (ruta):
     try:
-        os.rmdir(ruta)
+        shutil.rmtree(ruta)
         return "Archivo encontrado"
     except OSError:
         return "Archivo no encontrado"
@@ -30,6 +30,8 @@ def copiarArchivo (rutaOrigen, rutaDestino):
 def copiarCarpeta(rutaOrigen, rutaDestino):
 
     try:
+        nombreCarpetaOrigen = os.path.basename(rutaOrigen)
+        rutaDestino = manejoRutas.unirDireccion(rutaDestino, nombreCarpetaOrigen )
         shutil.copytree(rutaOrigen,rutaDestino)
         return "Carpeta copiada"
     except OSError:
@@ -54,7 +56,7 @@ def crearCarpeta(direccion,nombre):
 #//------------------------------------------
 #Operaciones validas para carpetas y archivos 
 
-def cambiarPermisos (archivo,codigo):
+def cambiarPermisos (archivo,codigo ):
     try:
         os.chmod(archivo,int(codigo,8))
         print("\nPermisos cambiados\n")
