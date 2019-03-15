@@ -30,6 +30,8 @@ def copiarArchivo (rutaOrigen, rutaDestino):
 def copiarCarpeta(rutaOrigen, rutaDestino):
 
     try:
+        nombreCarpetaOrigen = os.path.basename(rutaOrigen)
+        rutaDestino = manejoRutas.unirDireccion(rutaDestino, nombreCarpetaOrigen )
         shutil.copytree(rutaOrigen,rutaDestino)
         return "Carpeta copiada"
     except OSError:
