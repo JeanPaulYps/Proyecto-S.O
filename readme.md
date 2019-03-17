@@ -2,7 +2,7 @@
 
 Proyecto de sistemas operativos que consiste en mostrar los archivos del usuario, manipular los datos: copiar, pegar, cambiar nombre, borrar, cambiar permisos y crear.
 
-### Prerequisites
+### Prerequisitos
 
 Para poder correr el proyecto se necesita 
 
@@ -10,7 +10,7 @@ Para poder correr el proyecto se necesita
 FLASK
 ```
 
-### Installing
+### Instalacion
 
 Para instalar FLASK 
 
@@ -51,17 +51,13 @@ flask run
 ```
 
 
-## Built With
+## Construido con
 
 * [Flask](http://flask.pocoo.org) - Un microframework web
 * [Boostrap](https://getbootstrap.com/) - Libreria de estilos
 
 
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Authors
+## Autores
 
 * **Jean Paul Yepes**
 * **Jacob Arcila**
