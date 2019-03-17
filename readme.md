@@ -20,7 +20,19 @@ Instala FLASK con
 pip3 install flask
 ```
 
-Si tiene python 2, deberá instalar un entorno virtual
+configurar el proyecto para ser ejecutado por FLASK
+
+```
+export FLASK_APP=app.py
+```
+
+Correr el proyecto
+
+```
+flask run
+```
+
+Si tiene python 2, antes deberá instalar un entorno virtual
 
 ```
 sudo apt-get install python-virtualenv
@@ -38,17 +50,7 @@ Y para activarlo usa
 . venv/bin/activate
 ```
 
-Y configurando el proyecto para ser ejecutado por FLASK
 
-```
-export FLASK_APP=app.py
-```
-
-Correr el proyecto
-
-```
-flask run
-```
 
 
 ## Construido con
