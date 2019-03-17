@@ -41,7 +41,7 @@ Y para activarlo usa
 Y configurando el proyecto para ser ejecutado por FLASK
 
 ```
-export FLASK_APP=hello.py
+export FLASK_APP=app.py
 ```
 
 Correr el proyecto
